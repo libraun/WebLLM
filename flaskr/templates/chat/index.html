@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>JetBot</title>
 </head>
 <style>
-    .convo-window {
+    body {
         position: relative;
         display: block;
     }
-
     .chat-history-window {
         height: 440px;
         width: 400px;
@@ -26,21 +24,18 @@
 </style>
 <body>
     <h1>JetBot</h1>
-    <div class "convo-window">
-        <div class="chat-history-window">
-            {% if session.get("messages") %}
-                {% for msg in session["messages"] %}
-                    <p class="message">{{ msg }}</p>
-                    <br/>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class="text-input-window">
-            <p><label for="user-input">Ask me anything.</label></p>
-            <form method="post" action="{{ url_for('chat.send') }}">
-                <input type="text" name="message" rows="5" value="{{request.form['message']}}" cols="30"/>
-            </form>
-        </div>
+    <div class="chat-history-window">
+        {% if session.get("messages") %}
+            {% for user, msg in session["messages"] %}
+                <p class="message">{{ user + ": " + msg }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="text-input-window">
+        <p><label for="user-input">Ask me anything.</label></p>
+        <form method="post" action="{{ url_for('send') }}">
+            <input type="text" name="message" rows="5" value="{{request.form['message']}}" cols="30"/>
+        </form>
     </div>
 </body>
 </html>
