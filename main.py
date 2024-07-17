@@ -1,7 +1,6 @@
 
 from flask import Flask
 import torch
-import torchtext
 import pickle
 
 from MyLLM import model
