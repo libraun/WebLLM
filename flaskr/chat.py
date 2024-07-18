@@ -12,7 +12,7 @@ with open("MyLLM/all_vocab.pickle", "rb") as f:
 encoder = model.Encoder(len(en_vocab),256, 1)
 decoder = model.Decoder(len(en_vocab),256, 1)
 
-encoder.load_state_dict(torch.load("../"))
+encoder.load_state_dict(torch.load("../encoder"))
 decoder.load_state_dict(torch.load(DECODER_PATH))
 
 

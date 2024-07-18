@@ -28,14 +28,14 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    with open("all_vocab.pickle", "rb") as f:
+    with open("data/all_vocab.pickle", "rb") as f:
         en_vocab = pickle.load(f)
+
     encoder = model.Encoder(len(en_vocab),128, 0, device=torch.device('cpu'))
     decoder = model.Decoder(len(en_vocab),128, 0, device=torch.device('cpu'))
 
-    encoder.load_state_dict(torch.load("encoder.pt"))
-    decoder.load_state_dict(torch.load("decoder.pt"))
-
+    encoder.load_state_dict(torch.load("data/encoder.pt"))
+    decoder.load_state_dict(torch.load("data/decoder.pt"))
 
     @app.route('/index', methods=["GET"])
     def index():
